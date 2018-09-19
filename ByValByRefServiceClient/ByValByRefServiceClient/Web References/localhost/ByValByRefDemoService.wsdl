@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.timrobinson41tests.com/DemoProject" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.timrobinson41tests.com/DemoProject" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.timrobinson41tests.com/DemoProject">
+      <s:element name="Foo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="a" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="b" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FooResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="b" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="c" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Bar">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="d1" type="tns:Demo" />
+            <s:element minOccurs="0" maxOccurs="1" name="d2" type="tns:Demo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Demo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="M1" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="BarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="d2" type="tns:Demo" />
+            <s:element minOccurs="0" maxOccurs="1" name="d3" type="tns:Demo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="FooSoapIn">
+    <wsdl:part name="parameters" element="tns:Foo" />
+  </wsdl:message>
+  <wsdl:message name="FooSoapOut">
+    <wsdl:part name="parameters" element="tns:FooResponse" />
+  </wsdl:message>
+  <wsdl:message name="BarSoapIn">
+    <wsdl:part name="parameters" element="tns:Bar" />
+  </wsdl:message>
+  <wsdl:message name="BarSoapOut">
+    <wsdl:part name="parameters" element="tns:BarResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ByValByRefDemoServiceSoap">
+    <wsdl:operation name="Foo">
+      <wsdl:input message="tns:FooSoapIn" />
+      <wsdl:output message="tns:FooSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Bar">
+      <wsdl:input message="tns:BarSoapIn" />
+      <wsdl:output message="tns:BarSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ByValByRefDemoServiceSoap" type="tns:ByValByRefDemoServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Foo">
+      <soap:operation soapAction="http://www.timrobinson41tests.com/DemoProject/Foo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Bar">
+      <soap:operation soapAction="http://www.timrobinson41tests.com/DemoProject/Bar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ByValByRefDemoServiceSoap12" type="tns:ByValByRefDemoServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Foo">
+      <soap12:operation soapAction="http://www.timrobinson41tests.com/DemoProject/Foo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Bar">
+      <soap12:operation soapAction="http://www.timrobinson41tests.com/DemoProject/Bar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ByValByRefDemoService">
+    <wsdl:port name="ByValByRefDemoServiceSoap" binding="tns:ByValByRefDemoServiceSoap">
+      <soap:address location="http://localhost:54524/ByValByRefDemoService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ByValByRefDemoServiceSoap12" binding="tns:ByValByRefDemoServiceSoap12">
+      <soap12:address location="http://localhost:54524/ByValByRefDemoService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
